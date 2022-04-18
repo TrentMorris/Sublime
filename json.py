@@ -14,16 +14,6 @@ class JsonCommand(sublime_plugin.TextCommand):
 		return v
 
 	@staticmethod
-	def try_convert_to_double(v):
-		try:
-			v = double(v)
-		except:
-			a = ""
-			# Do nothing. Not an int so don't convert type
-		return v
-
-
-	@staticmethod
 	def clean_json(d):
 	    d =  {k: v for k, v in d.items() if v is not None }	    
 	    d =  {k: v for k, v in d.items() if v != [] }
@@ -31,8 +21,6 @@ class JsonCommand(sublime_plugin.TextCommand):
 	    for k,v in d.items():
 	    	if isinstance(v, str):
 	    		d[k] = JsonCommand.try_convert_to_int(v)
-	    	# if isinstance(v, str):
-	    	# 	d[k] = JsonCommand.try_convert_to_double(v)
 	    	if isinstance(v, list):
 	    		newList = [JsonCommand.try_convert_to_int(x) for x in v]
 	    		d[k] = newList
